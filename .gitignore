@@ -1,0 +1,17 @@
+node_modules/
+dist/
+logs/
+*.local.json
+report.html
+reports/
+err.log
+review.json
+
+# Public template ships without collected history; see README.
+data/*
+!data/.gitkeep
+
+# Claude Code session state and planning docs - local working history with
+# no audience outside the person who ran the session.
+.claude/
+plan.md

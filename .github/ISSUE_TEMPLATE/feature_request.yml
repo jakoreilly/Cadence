@@ -1,0 +1,42 @@
+name: Feature request
+description: Suggest a metric, finding, or capability Cadence doesn't have
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: >
+        What you were trying to find out about a team's delivery, and where
+        Cadence fell short. The question you wanted answered is more useful
+        here than the feature you have in mind.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you'd like
+      description: A new finding, a CLI flag, a report panel - whatever shape it takes.
+
+  - type: textarea
+    id: trust
+    attributes:
+      label: How would you label its trustworthiness?
+      description: >
+        Every figure in this tool is labelled Sound / Weak / Unusable (or
+        withheld) depending on how much of its basis is actually present -
+        see docs/decisions.md. A new metric needs the same treatment before
+        it reaches a report a manager shows to senior management.
+
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Constraints
+      description: >
+        Nothing that computes a number, threshold or finding may call a
+        model - see CONTRIBUTING.md.
+      options:
+        - label: This doesn't require a model to compute a figure (narration only, if any)
+        - label: This doesn't add a per-person productivity ranking (see docs/decisions.md)
+        - label: I'd be willing to open a PR

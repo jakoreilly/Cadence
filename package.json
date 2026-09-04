@@ -1,0 +1,45 @@
+{
+  "name": "cadence",
+  "version": "0.1.0",
+  "description": "Deterministic sprint-delivery collector and data-quality reporter for Jira boards with GitLab or GitHub merge/pull request data.",
+  "keywords": [
+    "jira",
+    "gitlab",
+    "github",
+    "sprint",
+    "agile",
+    "engineering-metrics",
+    "delivery-report",
+    "cli"
+  ],
+  "type": "module",
+  "license": "MIT",
+  "author": "John O'Reilly",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakoreilly/Cadence.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jakoreilly/Cadence/issues"
+  },
+  "homepage": "https://github.com/jakoreilly/Cadence#readme",
+  "bin": {
+    "cadence": "./dist/src/cli.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test \"dist/test/*.test.js\"",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "chart.js": "^4.5.1",
+    "eslint": "^9.0.0",
+    "typescript": "^5.6.0"
+  }
+}

@@ -1,0 +1,73 @@
+name: Bug report
+description: A command misbehaves, or a report/finding disagrees with the docs
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing: run the failing command with `--json` if it has that
+        flag - the structured output is usually more useful than the CLI
+        text. If the finding is about the report itself, check whether
+        `report` printed a "not collected" or "schemaVersion" warning first -
+        a lot of confusing panels turn out to be a snapshot collected with an
+        older schema.
+
+        **Please redact tokens, board/project identifiers, GitLab group
+        names, and any real person's name from anything you paste** - a
+        fixture profile (`profiles/fixture`) or the shape of the data,
+        rather than the real thing, is almost always enough to reproduce a
+        bug.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: And what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: The command you ran
+      description: The full invocation, redacted (profile name, board/project keys, hostnames).
+      render: sh
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: CLI output and, if relevant, the `--json` output or the report's own warning banner.
+      render: text
+
+  - type: dropdown
+    id: forge
+    attributes:
+      label: Forge
+      options:
+        - GitLab
+        - GitHub
+        - Both / neither, this is a Jira-only issue
+    validations:
+      required: true
+
+  - type: input
+    id: node
+    attributes:
+      label: Node version
+      description: "Output of `node -v`"
+      placeholder: "v22.11.0"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: "`npm test` passes on my machine (or I've said below how it fails)"
+        - label: I can reproduce this against `profiles/fixture` (or I've explained why it's specific to a real site)
+        - label: I've redacted tokens, hostnames, project/board identifiers and real names
+          required: true

@@ -1,0 +1,76 @@
+{
+  "_comment": "Worked example profile. Everything here is fictional - invented boards, groups and spaces for a made-up company ('Acme'). Copy this directory, rename it (the directory name becomes the snapshot folder under data/), then fill in real board ids from `cadence discover-boards` and real GitLab groups from `cadence suggest-groups`. Non-secret, safe to commit; credentials go in secrets.local.json next to this file (gitignored) or as env vars.",
+  "site": "acme.atlassian.net",
+  "gitlabWindowDays": 30,
+  "individualAttribution": true,
+  "_alerts_note": "`alert` is a DISCREET, PERSONAL review tool - it names individuals and their review habits, so nothing is posted to Slack or Confluence without the profile owner deciding to, every time. Both destinations stay OFF until deliberately enabled, and `alert --dry-run` prints exactly what it would send either way - that is how you decide. CONFLUENCE: make a page for the running log, put its numeric id (from the page URL, /wiki/spaces/KEY/pages/<id>/Title) in `pageId`, then set enabled - no page is ever created automatically. minSeverity is 'this-week' rather than 'watch' because a watch item is by definition drifting, and alerting on drift alerts every day.",
+  "alerts": {
+    "minSeverity": "this-week",
+    "limit": 8,
+    "slack": {
+      "enabled": false,
+      "channel": "#delivery-review"
+    },
+    "confluence": {
+      "enabled": false
+    }
+  },
+  "_reviewBotAccounts_note": "Matched against BOTH the GitLab username and the display name, case-insensitively. List both forms for every service account: an automation account here has username 'ci-bot' and display name 'Release Bot', and matching only the display name (what the GitLab UI shows) once classified it as a PERSON - it had authored dozens of merge requests. GitLab's own bot flag is not set on these accounts, so nothing in the API catches this for you.",
+  "reviewBotAccounts": [
+    "SonarQube",
+    "Release Bot",
+    "ci-bot"
+  ],
+  "teams": [
+    {
+      "key": "panther",
+      "description": "Board 701 'Web Platform Scrum' (WEB). Origin board, not a mirror: board 711 'Web Platform - Programme View' shares 100% of its sprints with 701 and holds WEB-keyed issues, so it is a view over this board's sprints, not a team - the test is `originBoardId` on the sprint object, which reports 701. The team key stays 'panther' (it was guessed from a sprint name early on) because renaming it would fork the collected time series. GitLab group 'web-storefront' is derived, not guessed: both top human MR authors in that group are board-701 assignees and 13 MRs in a 30-day window carry WEB keys matching board-701 issues. CONFLUENCE: space WEB 'Web Platform', which is also what the board name expands to - independent corroboration.",
+      "boardId": 701,
+      "enabled": true,
+      "gitlabGroups": [
+        "web-storefront"
+      ],
+      "confluenceSpaces": [
+        "WEB"
+      ]
+    },
+    {
+      "key": "tran",
+      "description": "Board 702 'Logistics Scrum Board' (LOG). Chosen over board 703 'Fleet Scrum Board': 703 shares 180 of 180 sprints with 702 and its issues are LOG-keyed, so it is a MIRROR VIEW, not a second team - sprint 7001 reports originBoardId 702, which settles which of the pair is the origin. GitLab group 'logistics-hub' derived: 11 MRs carry LOG keys matching board-702 issues and 3 of its recent MR authors are board-702 assignees. CONFLUENCE: space LOG 'Logistics', clear of the shared programme space PROG which scores against three teams at once.",
+      "boardId": 702,
+      "enabled": true,
+      "gitlabGroups": [
+        "logistics-hub"
+      ],
+      "confluenceSpaces": [
+        "LOG"
+      ]
+    },
+    {
+      "key": "fcp",
+      "description": "Board 704 'Onboarding Scrum' (ONB). Largest board on the site by issue count, no sprint overlap with any other configured board. GitLab group 'onboarding-hub' derived: 16 MRs carry ONB keys matching board-704 issues and 4 of its 6 recent MR authors are board-704 assignees. CONFLUENCE: TWO spaces, and both belong - ONB 'Onboarding' and EOP 'Easy Onboarding Plus' - because the team demonstrably writes under both names (its GitLab group and one of its active sprints are named for each). Configuring only the top scorer would drop half its documentation.",
+      "boardId": 704,
+      "enabled": true,
+      "gitlabGroups": [
+        "onboarding-hub"
+      ],
+      "confluenceSpaces": [
+        "ONB",
+        "EOP"
+      ]
+    },
+    {
+      "key": "fs",
+      "description": "Board 705 'Payments & CSP' (PAY, with some CSP). CAVEAT: several concurrent active sprints on this board (a security workstream, a CSP app workstream, a payment-gateway workstream, a backlog sprint), so the multiple-active-sprints quality finding fires here for real and per-team velocity blends those workstreams - see docs/decisions.md. Chosen over board 706 'CSP Scrum', which shares 94% of its sprints with this board (originBoardId 705). GitLab group 'payments-core' is the strongest mapping on the instance: 26 MRs carry PAY/CSP keys matching board-705 issues and 6 of its 9 recent MR authors are board-705 assignees. CONFLUENCE: PAY 'Payments' and CSP 'CSP Project' - one per workstream. The shared programme space PROG scored highest of all but is deliberately excluded: it also scores for two other teams, so it is a programme space, not this team's home.",
+      "boardId": 705,
+      "enabled": true,
+      "gitlabGroups": [
+        "payments-core"
+      ],
+      "confluenceSpaces": [
+        "PAY",
+        "CSP"
+      ]
+    }
+  ]
+}

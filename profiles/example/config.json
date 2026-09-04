@@ -1,0 +1,15 @@
+{
+  "_comment": "Copy this directory, rename it (the directory name becomes the snapshot folder under data/), and fill in real board ids from `cadence discover-boards`.",
+  "site": "acme.atlassian.net",
+  "gitlabWindowDays": 30,
+  "individualAttribution": true,
+  "teams": [
+    {
+      "key": "panther",
+      "description": "Panther services - board id observed live via the Sprint field on WEB-1387",
+      "boardId": 701,
+      "enabled": true,
+      "gitlabGroups": []
+    }
+  ]
+}

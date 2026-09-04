@@ -1,0 +1,62 @@
+{
+  "_comment": "Worked example of a GitHub profile. Identical to profiles/acme except `forge` is 'github' and each team lists `githubRepos` (owner/repo) instead of `gitlabGroups`. Everything is fictional. GitHub has no nested-group concept, so there is no `suggest-groups` step - list the repos each team owns by hand. Non-secret, safe to commit; the token goes in secrets.local.json.",
+  "site": "acme.atlassian.net",
+  "forge": "github",
+  "gitlabWindowDays": 30,
+  "individualAttribution": true,
+  "alerts": {
+    "minSeverity": "this-week",
+    "limit": 8,
+    "slack": { "enabled": false, "channel": "#delivery-review" },
+    "confluence": { "enabled": false }
+  },
+  "_reviewBotAccounts_note": "On GitHub the tool already excludes anything whose account type is 'Bot' or whose login ends in '[bot]' (dependabot[bot], renovate[bot], ...). This list is only for CI/service accounts created as ordinary users - list the login, and the display name too if they differ.",
+  "reviewBotAccounts": [
+    "sonarcloud",
+    "acme-ci"
+  ],
+  "teams": [
+    {
+      "key": "panther",
+      "description": "Board 701 'Web Platform Scrum' (WEB). Repos owned by this team on GitHub - the PR review metrics are scoped to exactly these.",
+      "boardId": 701,
+      "enabled": true,
+      "githubRepos": [
+        "acme/web-storefront",
+        "acme/web-storefront-api"
+      ],
+      "confluenceSpaces": ["WEB"]
+    },
+    {
+      "key": "tran",
+      "description": "Board 702 'Logistics Scrum Board' (LOG).",
+      "boardId": 702,
+      "enabled": true,
+      "githubRepos": [
+        "acme/logistics-hub"
+      ],
+      "confluenceSpaces": ["LOG"]
+    },
+    {
+      "key": "fcp",
+      "description": "Board 704 'Onboarding Scrum' (ONB).",
+      "boardId": 704,
+      "enabled": true,
+      "githubRepos": [
+        "acme/onboarding-hub",
+        "acme/onboarding-hub-web"
+      ],
+      "confluenceSpaces": ["ONB", "EOP"]
+    },
+    {
+      "key": "fs",
+      "description": "Board 705 'Payments & CSP' (PAY, with some CSP).",
+      "boardId": 705,
+      "enabled": true,
+      "githubRepos": [
+        "acme/payments-core"
+      ],
+      "confluenceSpaces": ["PAY", "CSP"]
+    }
+  ]
+}

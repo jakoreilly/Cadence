@@ -1,0 +1,23 @@
+# Normalise to LF in the repository; check out per-platform. Without this, what
+# lands in a commit depends on each machine's core.autocrlf setting, so the same
+# edit produces a different diff on different clones.
+* text=auto
+
+# Batch files are read by cmd.exe, which is not reliable with LF endings.
+*.cmd text eol=crlf
+
+# PowerShell is happy with either, but the scheduled collector runs on
+# Windows Task Scheduler, so pin it for byte-identical clones.
+*.ps1 text eol=crlf
+
+# Everything else stays LF everywhere, including on a Windows checkout.
+*.ts   text eol=lf
+*.mjs  text eol=lf
+*.js   text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+*.png binary
+*.ico binary
